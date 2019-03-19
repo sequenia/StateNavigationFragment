@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/email_graph"
+    app:startDestination="@id/sendedEmailFragment">
+
+    <fragment
+        android:id="@+id/sendedEmailFragment"
+        android:name="com.example.statenavigationfragment.SendedEmailFragment"
+        android:label="fragment_sended_email"
+        tools:layout="@layout/fragment_sended_email" >
+        <action
+            android:id="@+id/action_sendedEmailFragment_to_historyEmailsFragment"
+            app:destination="@id/historyEmailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyEmailsFragment"
+        android:name="com.example.statenavigationfragment.HistoryEmailsFragment"
+        android:label="fragment_history_emails"
+        tools:layout="@layout/fragment_history_emails" >
+        <action
+            android:id="@+id/action_historyEmailsFragment_to_history2Fragment"
+            app:destination="@id/history2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/history2Fragment"
+        android:name="com.example.statenavigationfragment.History2Fragment"
+        android:label="fragment_history2"
+        tools:layout="@layout/fragment_history2" />
+
+</navigation>
