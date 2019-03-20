@@ -12,21 +12,30 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
 import androidx.navigation.fragment.FragmentNavigator;
 
+/**
+ * FragmentNavigator с сохранением состояний фрагментов
+ * <p>
+ * в разметке задается по имени state_fragment
+ */
 @Navigator.Name("state_fragment")
-public class StateNavigator extends FragmentNavigator {
+public class FragmentStateNavigator extends FragmentNavigator {
 
     private final static String DESTINATION_ID = "DESTINATION_ID";
 
     private FragmentManager manager;
     private int containerId;
 
-    private FragmentState fragmentState;
-    private int fragmentId;
+    /**
+     * Умеет работать с состояниями фрагмента
+     * - сохранять
+     * - восстанавливать
+     */
+    private FragmentsState fragmentsState;
 
-    public StateNavigator(@NonNull Context context, @NonNull FragmentManager manager,
-                          int containerId) {
+    public FragmentStateNavigator(@NonNull Context context, @NonNull FragmentManager manager,
+                                  int containerId) {
         super(context, manager, containerId);
-        this.fragmentState = new FragmentState(manager);
+        this.fragmentsState = new FragmentsState(manager);
         this.manager = manager;
         this.containerId = containerId;
     }
@@ -39,9 +48,8 @@ public class StateNavigator extends FragmentNavigator {
         if (args == null) {
             args = new Bundle();
         }
-        fragmentId = destination.getId();
         args.putInt(DESTINATION_ID, destination.getId());
-        saveFragmentState(getCurrentFragment());
+        saveState(getCurrentFragment());
         return super.navigate(destination, args, navOptions, navigatorExtras);
     }
 
@@ -52,35 +60,48 @@ public class StateNavigator extends FragmentNavigator {
                                         @NonNull String className, @Nullable Bundle args) {
         Fragment fragment = super.instantiateFragment(context, fragmentManager, className, args);
         if (args != null) {
-            fragmentState.restoreState(fragment, args.getInt(DESTINATION_ID));
+            fragmentsState.restoreState(fragment, args.getInt(DESTINATION_ID));
         }
         return fragment;
     }
 
-    void removeFragmentState() {
-        fragmentState.removeState(fragmentId);
+    /**
+     * @return - все сохраненные состояния
+     */
+    Bundle getStatesBundle() {
+        return fragmentsState.saveStates();
     }
 
-    Bundle getFragmentStateBundle() {
-        return fragmentState.saveHelperState();
-    }
-
-    void restoreHelperState(Bundle bundle) {
+    /**
+     * Восстановление состояний всех сохраненных фрагментов
+     *
+     * @param bundle - все сохраненные состояния
+     */
+    void restoreStates(Bundle bundle) {
         if (bundle == null) {
             return;
         }
-        fragmentState.restoreHelperState(bundle);
+        fragmentsState.restoreStates(bundle);
     }
 
-    private void saveFragmentState(Fragment currentFragment) {
-        if (currentFragment != null) {
-            Bundle currentArgs = currentFragment.getArguments();
-            if (currentArgs != null) {
-                fragmentState.saveState(currentFragment, currentArgs.getInt(DESTINATION_ID));
-            }
+    /**
+     * Сохранение состояние текущего фрагмента
+     *
+     * @param currentFragment - верхний фрагмент в стеке (текущий)
+     */
+    private void saveState(Fragment currentFragment) {
+        if (currentFragment == null) {
+            return;
+        }
+        Bundle currentArgs = currentFragment.getArguments();
+        if (currentArgs != null) {
+            fragmentsState.saveState(currentFragment, currentArgs.getInt(DESTINATION_ID));
         }
     }
 
+    /**
+     * @return - верхний фрагмент в стеке (текущий)
+     */
     private Fragment getCurrentFragment() {
         return manager.findFragmentById(containerId);
     }

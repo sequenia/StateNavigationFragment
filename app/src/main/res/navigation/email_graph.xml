@@ -3,30 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/email_graph"
-    app:startDestination="@id/sendedEmailFragment">
+    app:startDestination="@id/emailFragment">
 
     <fragment
-        android:id="@+id/sendedEmailFragment"
-        android:name="com.example.statenavigationfragment.SendedEmailFragment"
+        android:id="@+id/emailFragment"
+        android:name="com.example.statenavigationfragment.email.EmailFragment"
         android:label="fragment_sended_email"
-        tools:layout="@layout/fragment_sended_email" >
+        tools:layout="@layout/email_fragment">
         <action
-            android:id="@+id/action_sendedEmailFragment_to_historyEmailsFragment"
-            app:destination="@id/historyEmailsFragment" />
+            android:id="@+id/action_emailFragment_to_emailSendFragment"
+            app:destination="@id/emailSendFragment" />
+        <action
+            android:id="@+id/action_emailFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
-        android:id="@+id/historyEmailsFragment"
-        android:name="com.example.statenavigationfragment.HistoryEmailsFragment"
-        android:label="fragment_history_emails"
-        tools:layout="@layout/fragment_history_emails" >
+        android:id="@+id/emailSendFragment"
+        android:name="com.example.statenavigationfragment.email.EmailSendFragment"
+        android:label="fragment_email_send"
+        tools:layout="@layout/email_send_fragment">
         <action
-            android:id="@+id/action_historyEmailsFragment_to_history2Fragment"
-            app:destination="@id/history2Fragment" />
+            android:id="@+id/action_emailSendFragment_to_emailFragment"
+            app:popUpTo="@+id/emailFragment" />
+        <action
+            android:id="@+id/action_emailSendFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/history2Fragment"
-        android:name="com.example.statenavigationfragment.History2Fragment"
-        android:label="fragment_history2"
-        tools:layout="@layout/fragment_history2" />
+        android:id="@+id/listFragment"
+        android:name="com.example.statenavigationfragment.ListFragment"
+        android:label="fragment_emails_fragment"
+        tools:layout="@layout/fragment_list">
+        <argument
+            android:name="TYPE"
+            android:defaultValue="EMAIL"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.example.statenavigationfragment.email.ContactsFragment"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts">
+        <action
+            android:id="@+id/action_contactsFragment_to_emailSendFragment"
+            app:popUpTo="@+id/emailSendFragment" />
+    </fragment>
 
 </navigation>

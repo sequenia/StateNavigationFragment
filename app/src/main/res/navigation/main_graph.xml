@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/mapFragment">
+    app:startDestination="@id/mainFragment">
 
     <state_fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.statenavigationfragment.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        android:id="@+id/mainFragment"
+        android:name="com.example.statenavigationfragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/main_fragment" />
     <state_fragment
-        android:id="@+id/emailFragment"
-        android:name="com.example.statenavigationfragment.EmailFragment"
+        android:id="@+id/emailMainFragment"
+        android:name="com.example.statenavigationfragment.EmailMainFragment"
         android:label="fragment_email"
-        tools:layout="@layout/fragment_email" />
+        tools:layout="@layout/main_fragment" />
     <state_fragment
         android:id="@+id/listFragment"
         android:name="com.example.statenavigationfragment.ListFragment"
