@@ -1,5 +1,6 @@
 package com.example.statenavigationfragment.email;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.statenavigationfragment.R;
+import com.sequenia.state_navigation_fragment.result.ResultListener;
+import com.sequenia.state_navigation_fragment.result.ResultViewModel;
 
 import androidx.navigation.Navigation;
 
@@ -17,6 +20,8 @@ import androidx.navigation.Navigation;
  * Отправка письма
  */
 public class EmailSendFragment extends Fragment {
+
+    private ResultViewModel resultModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -28,20 +33,24 @@ public class EmailSendFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            boolean isResult = bundle.getBoolean("RESULT", false);
-            bundle.remove("RESULT");
-            if (isResult) {
-                Toast.makeText(getContext(), "CONTACT CHOOSE!", Toast.LENGTH_SHORT).show();
+        resultModel = ViewModelProviders.of(getActivity()).get(ResultViewModel.class);
+
+        resultModel.getResult(new ResultListener() {
+            @Override
+            public void onResult(@NonNull Bundle bundle) {
+                boolean isResult = bundle.getBoolean("RESULT_CONTACTS", false);
+                if (isResult) {
+                    Toast.makeText(getContext(), "CONTACT CHOOSE!", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
+        });
 
         view.findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("RESULT", true);
+                bundle.putBoolean("RESULT_SEND", true);
+                resultModel.setResult(bundle);
                 Navigation.findNavController(view)
                         .navigate(R.id.action_emailSendFragment_to_emailFragment, bundle);
             }

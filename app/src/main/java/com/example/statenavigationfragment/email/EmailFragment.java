@@ -1,5 +1,6 @@
 package com.example.statenavigationfragment.email;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.statenavigationfragment.R;
+import com.sequenia.state_navigation_fragment.result.ResultListener;
+import com.sequenia.state_navigation_fragment.result.ResultViewModel;
 
 import androidx.navigation.Navigation;
 
@@ -28,14 +31,16 @@ public class EmailFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            boolean isSend = bundle.getBoolean("RESULT", false);
-            bundle.remove("RESULT");
-            if (isSend) {
-                Toast.makeText(getContext(), "EMAIL SEND!", Toast.LENGTH_SHORT).show();
+        ResultViewModel resultModel = ViewModelProviders.of(getActivity()).get(ResultViewModel.class);
+        resultModel.getResult(new ResultListener() {
+            @Override
+            public void onResult(@NonNull Bundle bundle) {
+                boolean isSend = bundle.getBoolean("RESULT_SEND", false);
+                if (isSend) {
+                    Toast.makeText(getContext(), "EMAIL SEND!", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
+        });
 
         view.findViewById(R.id.emails).setOnClickListener(new View.OnClickListener() {
             @Override

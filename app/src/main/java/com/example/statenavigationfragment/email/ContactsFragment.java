@@ -1,6 +1,7 @@
 package com.example.statenavigationfragment.email;
 
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.statenavigationfragment.R;
+import com.sequenia.state_navigation_fragment.result.ResultViewModel;
 
 import androidx.navigation.Navigation;
 
@@ -28,10 +30,12 @@ public class ContactsFragment extends Fragment {
         view.findViewById(R.id.selected).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ResultViewModel result = ViewModelProviders.of(getActivity()).get(ResultViewModel.class);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("RESULT", true);
+                bundle.putBoolean("RESULT_CONTACTS", true);
+                result.setResult(bundle);
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_contactsFragment_to_emailSendFragment, bundle);
+                        .navigate(R.id.action_contactsFragment_to_emailSendFragment);
             }
         });
     }
