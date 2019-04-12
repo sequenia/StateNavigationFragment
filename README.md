@@ -1,10 +1,26 @@
+[![](https://jitpack.io/v/sequenia/StateNavigationFragment.svg)](https://jitpack.io/#sequenia/StateNavigationFragment)
+
 # StateNavigationFragment
 
 Навигация на основе [Google Navigation](https://developer.android.com/guide/navigation) с возможностью сохранять состояние фрагментов.
 
 ## Подключение
 
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+dependencies {
+        implementation 'com.github.sequenia:StateNavigationFragment:Tag'
+}
+```
+
 Не забудьте подключить
+
 ```
     implementation "android.arch.lifecycle:extensions:X.X.X"
     annotationProcessor "android.arch.lifecycle:compiler:X.X.X"
