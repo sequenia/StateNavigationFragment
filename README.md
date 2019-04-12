@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-        implementation 'com.github.sequenia:StateNavigationFragment:Tag'
+        implementation 'com.github.sequenia:StateNavigationFragment:Y.Y.Y'
 }
 ```
 
