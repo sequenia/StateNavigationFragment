@@ -15,18 +15,18 @@ allprojects {
 }
 
 dependencies {
-        implementation 'com.github.sequenia:StateNavigationFragment:Y.Y.Y'
+    implementation 'com.github.sequenia:StateNavigationFragment:Y.Y.Y'
 }
 ```
 
-Не забудьте подключить
+> Не забудьте подключить 
 
 ```
-    implementation "android.arch.lifecycle:extensions:X.X.X"
-    annotationProcessor "android.arch.lifecycle:compiler:X.X.X"
+implementation "android.arch.lifecycle:extensions:X.X.X"
+annotationProcessor "android.arch.lifecycle:compiler:X.X.X"
 
-    implementation "android.arch.navigation:navigation-fragment:Z.Z.Z"
-    implementation "android.arch.navigation:navigation-ui:Z.Z.Z"
+implementation "android.arch.navigation:navigation-fragment:Z.Z.Z"
+implementation "android.arch.navigation:navigation-ui:Z.Z.Z"
 ```
 
 ## Использование
@@ -96,8 +96,8 @@ bottomNavigationView.setOnNavigationItemSelectedListener(
 Для возвращения на экран можно использовать `action`. Имя `action` формируется из имени экрана, с которого осуществляется переход, и имени экрана, на который осуществляется переходят. Атрибутом `acapp:popUpTo` задается `id` экрана, до какого необходимо вернуться.
 ```
 <action
-            android:id="@+id/action_emailSendFragment_to_emailFragment"
-            app:popUpTo="@+id/emailFragment" />
+    android:id="@+id/action_emailSendFragment_to_emailFragment"
+    app:popUpTo="@+id/emailFragment" />
  ```
 При возвращение на экран в Google Navigation не предусмотрена передача параметров. Поэтому Google предлагает использовать `ViewModel`. В библиотеке создана обертка `ResultViewModel` над `ViewModel` для передачи результата.
 ```
