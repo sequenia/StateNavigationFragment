@@ -22,11 +22,11 @@ dependencies {
 > Не забудьте подключить 
 
 ```
-implementation "android.arch.lifecycle:extensions:X.X.X"
-annotationProcessor "android.arch.lifecycle:compiler:X.X.X"
+implementation "androidx.lifecycle:lifecycle-extensions:X.X.X"
+annotationProcessor "androidx.lifecycle:lifecycle-compiler:X.X.X"
 
-implementation "android.arch.navigation:navigation-fragment:Z.Z.Z"
-implementation "android.arch.navigation:navigation-ui:Z.Z.Z"
+implementation "androidx.navigation:navigation-fragment:Z.Z.Z"
+implementation "androidx.navigation:navigation-ui:Z.Z.Z"
 ```
 
 ## Использование

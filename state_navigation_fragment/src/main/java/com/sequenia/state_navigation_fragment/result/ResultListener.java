@@ -1,7 +1,7 @@
 package com.sequenia.state_navigation_fragment.result;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Слушатель на получение результата
