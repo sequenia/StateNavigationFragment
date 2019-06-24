@@ -8,7 +8,9 @@ import android.view.MenuItem;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
+import androidx.navigation.Navigator;
+import androidx.navigation.fragment.FragmentNavigator;
+@Navigator.Name("state_fragment")
 public class MainActivity extends AppCompatActivity {
 
     /**

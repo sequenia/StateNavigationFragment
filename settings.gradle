@@ -1,1 +1,1 @@
-include ':app', ':state_navigation_fragment'
+include ':app', ':state_navigation_fragment', ':stub'

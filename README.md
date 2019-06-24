@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.sequenia:StateNavigationFragment:Y.Y.Y'
+    implementation 'com.github.sequenia.StateNavigationFragment:state_navigation_fragment:Y.Y.Y'
 }
 ```
 
