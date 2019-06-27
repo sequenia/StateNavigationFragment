@@ -6,8 +6,8 @@ buildscript {
             'compileSdk': 28,
             'minSdk': 21,
             'targetSdk': 28,
-            'versionName': '0.2.1',
-            'versionCode': 3,
+            'versionName': '0.2.2',
+            'versionCode': 4,
     ]
 
     repositories {
