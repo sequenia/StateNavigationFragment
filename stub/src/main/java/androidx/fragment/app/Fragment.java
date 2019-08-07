@@ -12,6 +12,10 @@ public class Fragment {
         throw new RuntimeException("stub!");
     }
 
+    public void setArguments(@Nullable Bundle args) {
+        throw new RuntimeException("stub!");
+    }
+
     final public boolean isAdded() {
         throw new RuntimeException("stub!");
     }

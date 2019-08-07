@@ -2,11 +2,11 @@ package com.sequenia.state_navigation_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
@@ -61,6 +61,8 @@ public class FragmentStateNavigator extends FragmentNavigator {
         Fragment fragment = super.instantiateFragment(context, fragmentManager, className, args);
         if (args != null) {
             fragmentsState.restoreState(fragment, args.getInt(DESTINATION_ID));
+            // TODO пока всегда перезадаются, но есть вероятность, что надо только по флажку
+            fragment.setArguments(args);
         }
         return fragment;
     }
