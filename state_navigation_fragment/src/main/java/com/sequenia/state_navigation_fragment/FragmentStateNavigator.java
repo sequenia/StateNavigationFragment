@@ -2,11 +2,11 @@ package com.sequenia.state_navigation_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
@@ -19,6 +19,11 @@ import androidx.navigation.fragment.FragmentNavigator;
  */
 @Navigator.Name("state_fragment")
 public class FragmentStateNavigator extends FragmentNavigator {
+
+    /**
+     * true восстановить имеющееся состояние
+     */
+    public final static String NEED_TO_RESTORE = "NEED_TO_RESTORE";
 
     private final static String DESTINATION_ID = "DESTINATION_ID";
 
@@ -58,9 +63,15 @@ public class FragmentStateNavigator extends FragmentNavigator {
     public Fragment instantiateFragment(@NonNull Context context,
                                         @NonNull FragmentManager fragmentManager,
                                         @NonNull String className, @Nullable Bundle args) {
+        boolean needToRestore = args != null && args.getBoolean(NEED_TO_RESTORE, true);
+        if (args != null && !needToRestore) {
+            args.remove(NEED_TO_RESTORE);
+        }
         Fragment fragment = super.instantiateFragment(context, fragmentManager, className, args);
-        if (args != null) {
+        if (needToRestore) {
             fragmentsState.restoreState(fragment, args.getInt(DESTINATION_ID));
+        } else {
+            fragment.setArguments(args);
         }
         return fragment;
     }
