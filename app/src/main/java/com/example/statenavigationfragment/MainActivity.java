@@ -1,15 +1,16 @@
 package com.example.statenavigationfragment;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.Navigator;
-import androidx.navigation.fragment.FragmentNavigator;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 @Navigator.Name("state_fragment")
 public class MainActivity extends AppCompatActivity {
 

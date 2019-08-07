@@ -20,6 +20,11 @@ import androidx.navigation.fragment.FragmentNavigator;
 @Navigator.Name("state_fragment")
 public class FragmentStateNavigator extends FragmentNavigator {
 
+    /**
+     * true восстановить имеющееся состояние
+     */
+    public final static String NEED_TO_RESTORE = "NEED_TO_RESTORE";
+
     private final static String DESTINATION_ID = "DESTINATION_ID";
 
     private FragmentManager manager;
@@ -58,10 +63,14 @@ public class FragmentStateNavigator extends FragmentNavigator {
     public Fragment instantiateFragment(@NonNull Context context,
                                         @NonNull FragmentManager fragmentManager,
                                         @NonNull String className, @Nullable Bundle args) {
+        boolean needToRestore = args != null && args.getBoolean(NEED_TO_RESTORE, true);
+        if (args != null && !needToRestore) {
+            args.remove(NEED_TO_RESTORE);
+        }
         Fragment fragment = super.instantiateFragment(context, fragmentManager, className, args);
-        if (args != null) {
+        if (needToRestore) {
             fragmentsState.restoreState(fragment, args.getInt(DESTINATION_ID));
-            // TODO пока всегда перезадаются, но есть вероятность, что надо только по флажку
+        } else {
             fragment.setArguments(args);
         }
         return fragment;
