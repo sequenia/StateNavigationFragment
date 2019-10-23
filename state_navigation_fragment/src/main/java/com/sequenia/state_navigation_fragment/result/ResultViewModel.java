@@ -1,7 +1,8 @@
 package com.sequenia.state_navigation_fragment.result;
 
-import androidx.lifecycle.ViewModel;
 import android.os.Bundle;
+
+import androidx.lifecycle.ViewModel;
 
 /**
  * ViewModel для передачи результатов между экранами
@@ -38,7 +39,7 @@ public class ResultViewModel extends ViewModel {
         if (bundle == null) {
             return;
         }
-        listener.onResult(bundle);
         setResult(null);
+        listener.onResult(bundle);
     }
 }
