@@ -8,17 +8,17 @@
 
     <state_fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.statenavigationfragment.MainFragment"
+        android:name="com.example.statenavigationfragment.fragments.graphs.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/main_fragment" />
     <state_fragment
         android:id="@+id/emailMainFragment"
-        android:name="com.example.statenavigationfragment.EmailMainFragment"
+        android:name="com.example.statenavigationfragment.fragments.graphs.EmailMainFragment"
         android:label="fragment_email"
         tools:layout="@layout/main_fragment" />
     <state_fragment
         android:id="@+id/listFragment"
-        android:name="com.example.statenavigationfragment.ListFragment"
+        android:name="com.example.statenavigationfragment.fragments.graphs.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
 

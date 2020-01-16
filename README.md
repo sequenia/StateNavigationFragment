@@ -43,7 +43,7 @@ app:startDestination="@id/mainFragment"
 ```
 <state_fragment
       android:id="@+id/mainFragment"
-      android:name="com.example.statenavigationfragment.MainFragment"
+      android:name="com.example.statenavigationfragment.fragments.graphs.MainFragment"
       android:label="fragment_main"
       tools:layout="@layout/main_fragment" />
 ```
