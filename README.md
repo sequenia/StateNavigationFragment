@@ -99,25 +99,26 @@ bottomNavigationView.setOnNavigationItemSelectedListener(
     android:id="@+id/action_emailSendFragment_to_emailFragment"
     app:popUpTo="@+id/emailFragment" />
  ```
-При возвращение на экран в Google Navigation не предусмотрена передача параметров. Поэтому Google предлагает использовать `ViewModel`. В библиотеке создана обертка `ResultViewModel` над `ViewModel` для передачи результата.
-```
-ResultViewModel resultModel = ViewModelProviders.of(getActivity()).get(ResultViewModel.class);
- ```
-#### Задание результата
 
-Метод `setResult` принимает `Bundle`
+При возвращение на экран в Google Navigation не предусмотрена передача параметров. Поэтому Google предлагает использовать `ViewModel`. Библиотека предоставляет интерфейс для передачи и приема результата как между Fragment, так и между Activity. Для этого необходимо реализовать интерфейс `ScreenResultHandler` и добавить следующий код:
+```
+@Override
+public void onResume() {
+    super.onResume();
+    checkReceivedScreenResult();
+}
+ ```
+
+Метод `checkReceivedScreenResult()` проверяет наличие результата во `ViewModel`. Если во `ViewModel` есть результат, то вызывается метод. 
+```
+boolean onScreenResultReceive(@NonNull Bundle bundle)
+ ```
+
+По умолчанию метод `onScreenResultReceive` возращает `false`. Метод `onScreenResultReceive` должен возвращать `true`, если результат получен и обработан. 
+
+Результат задается вызовом метода `setScreenResult` принимает `Bundle`
 ```
 Bundle bundle = new Bundle();
 bundle.putBoolean("RESULT_SEND", true);
-resultModel.setResult(bundle);
-```
-
-#### Получение рузультата
-```
-resultModel.getResult(new ResultListener() {
-          @Override
-          public void onResult(@NonNull Bundle bundle) {
-              // RESULT
-          }
-      });
+setScreenResult(bundle);
 ```
