@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.sequenia.state_navigation_fragment.result.view_models.ResultViewModel;
 import com.sequenia.state_navigation_fragment.result.view_models.ResultViewModelFactory;
@@ -70,8 +70,7 @@ public interface ScreenResultHandler {
         if (fragmentActivity == null) {
             return null;
         }
-        return ViewModelProviders
-                .of(fragmentActivity, ResultViewModelFactory.getInstance())
+        return new ViewModelProvider(fragmentActivity, ResultViewModelFactory.getInstance())
                 .get(ResultViewModel.class);
     }
 }
