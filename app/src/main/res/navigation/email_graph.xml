@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/emailFragment"
-        android:name="com.example.statenavigationfragment.email.EmailFragment"
+        android:name="com.example.statenavigationfragment.fragments.email.EmailFragment"
         android:label="fragment_sended_email"
         tools:layout="@layout/email_fragment">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailSendFragment"
-        android:name="com.example.statenavigationfragment.email.EmailSendFragment"
+        android:name="com.example.statenavigationfragment.fragments.email.EmailSendFragment"
         android:label="fragment_email_send"
         tools:layout="@layout/email_send_fragment">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.statenavigationfragment.ListFragment"
+        android:name="com.example.statenavigationfragment.fragments.graphs.ListFragment"
         android:label="fragment_emails_fragment"
         tools:layout="@layout/fragment_list">
         <argument
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactsFragment"
-        android:name="com.example.statenavigationfragment.email.ContactsFragment"
+        android:name="com.example.statenavigationfragment.fragments.email.ContactsFragment"
         android:label="fragment_contacts"
         tools:layout="@layout/fragment_contacts">
         <action
