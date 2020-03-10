@@ -20,7 +20,7 @@ android {
 
 ext {
     moxy_version = '1.7.0'
-    androidx_version = '2.1.0'
+    androidx_version = '2.2.0'
 }
 
 dependencies {

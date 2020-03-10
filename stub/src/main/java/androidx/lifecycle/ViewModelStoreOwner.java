@@ -1,4 +1,4 @@
 package androidx.lifecycle;
 
-public class ViewModelStoreOwner {
+public interface ViewModelStoreOwner {
 }
