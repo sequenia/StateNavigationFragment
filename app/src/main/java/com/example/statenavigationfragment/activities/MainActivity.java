@@ -1,4 +1,4 @@
-package com.example.statenavigationfragment;
+package com.example.statenavigationfragment.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.Navigator;
 
+import com.example.statenavigationfragment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 @Navigator.Name("state_fragment")

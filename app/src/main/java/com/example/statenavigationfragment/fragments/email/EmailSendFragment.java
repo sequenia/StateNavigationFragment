@@ -1,27 +1,22 @@
-package com.example.statenavigationfragment.email;
+package com.example.statenavigationfragment.fragments.email;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.statenavigationfragment.R;
-import com.sequenia.state_navigation_fragment.result.ResultListener;
-import com.sequenia.state_navigation_fragment.result.ResultViewModel;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
+
+import com.example.statenavigationfragment.R;
+import com.example.statenavigationfragment.base.BaseFragment;
 
 /**
  * Отправка письма
  */
-public class EmailSendFragment extends Fragment {
-
-    private ResultViewModel resultModel;
+public class EmailSendFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -33,26 +28,13 @@ public class EmailSendFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        resultModel = ViewModelProviders.of(getActivity()).get(ResultViewModel.class);
-
-        resultModel.getResult(new ResultListener() {
-            @Override
-            public void onResult(@NonNull Bundle bundle) {
-                boolean isResult = bundle.getBoolean("RESULT_CONTACTS", false);
-                if (isResult) {
-                    Toast.makeText(getContext(), "CONTACT CHOOSE!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         view.findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("RESULT_SEND", true);
-                resultModel.setResult(bundle);
-                Navigation.findNavController(view)
-                        .navigate(R.id.action_emailSendFragment_to_emailFragment, bundle);
+                setScreenResult(bundle);
+                Navigation.findNavController(view).navigate(R.id.action_emailSendFragment_to_emailFragment, bundle);
             }
         });
 
@@ -63,5 +45,16 @@ public class EmailSendFragment extends Fragment {
                         .navigate(R.id.action_emailSendFragment_to_contactsFragment);
             }
         });
+    }
+
+    @Override
+    public boolean onScreenResultReceive(@NonNull Bundle bundle) {
+        boolean isResult = bundle.getBoolean("RESULT_CONTACTS", false);
+        if (isResult) {
+            Toast.makeText(getContext(), "CONTACT CHOOSE!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return false;
     }
 }

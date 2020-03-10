@@ -1,25 +1,22 @@
-package com.example.statenavigationfragment.email;
+package com.example.statenavigationfragment.fragments.email;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.statenavigationfragment.R;
-import com.sequenia.state_navigation_fragment.result.ResultListener;
-import com.sequenia.state_navigation_fragment.result.ResultViewModel;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
+
+import com.example.statenavigationfragment.R;
+import com.example.statenavigationfragment.base.BaseFragment;
 
 /**
  * Главный фрагмент в графе EMAIL
  */
-public class EmailFragment extends Fragment {
+public class EmailFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -30,17 +27,6 @@ public class EmailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        ResultViewModel resultModel = ViewModelProviders.of(getActivity()).get(ResultViewModel.class);
-        resultModel.getResult(new ResultListener() {
-            @Override
-            public void onResult(@NonNull Bundle bundle) {
-                boolean isSend = bundle.getBoolean("RESULT_SEND", false);
-                if (isSend) {
-                    Toast.makeText(getContext(), "EMAIL SEND!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         view.findViewById(R.id.emails).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,5 +51,15 @@ public class EmailFragment extends Fragment {
             return;
         }
         Navigation.findNavController(view).navigate(id, bundle);
+    }
+
+    @Override
+    public boolean onScreenResultReceive(@NonNull Bundle bundle) {
+        boolean isSend = bundle.getBoolean("RESULT_SEND", false);
+        if (isSend) {
+            Toast.makeText(getContext(), "EMAIL SEND!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 }
